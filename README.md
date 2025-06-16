@@ -1,5 +1,9 @@
 # Overview
+
 This tool automates the conversion of CSV files into Excel workbooks (.xlsx), organizing temperature measurements into experimental days based on a specified starting time and sampling rate. It is particularly useful for processing iButton data or similar loggers that record periodic measurements.
+
+> [!IMPORTANT]
+> The current implementation was built based on the requirements and early version of the tool developed in Jupyter Notebook by [Itzel B Torres Leyva](https://github.com/itzelbtl/Ibuttons_funciones). Her initial work served as a guide for restructuring the tool into a more robust and standalone Python application.
 
 ### Key features:
 - Reads multiple CSV files from a folder automatically.
