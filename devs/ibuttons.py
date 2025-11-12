@@ -128,18 +128,23 @@ class MacroHandler():
     
     def extract_time(self, datetime_str: str) -> str:
         try:
-            return datetime_str.strip().split()[1]
-        except IndexError:
-            return datetime_str
+            dt_object = datetime.strptime(datetime_str.strip(), "%d/%m/%y %I:%M:%S %p")
+            return dt_object.strftime("%I:%M:%S %p")
+        except ValueError:
+            try:
+                dt_object = datetime.strptime(datetime_str.strip(), "%d/%m/%Y %H:%M")
+                return dt_object.strftime("%I:%M:%S %p") 
+            except Exception:
+                raise ValueError(f"Could not parse datetime string: '{datetime_str}'.")
     #end def
     
     def get_next_time(self,current_time_str):
-        try:
-            current_time = datetime.strptime(current_time_str, "%H:%M")
+        try:  
+            current_time = datetime.strptime(current_time_str, "%I:%M:%S %p")
             next_time = current_time + timedelta(minutes=self.sampleRate)
-            return next_time.strftime("%H:%M")
+            return next_time.strftime("%I:%M:%S %p") 
         except ValueError:
-            raise ValueError(f"Invalid time format: '{current_time_str}'.")
+            raise ValueError(f"Invalid time format: '{current_time_str}'. Check if all time strings match the expected format 'HH:MM:SS AM/PM'.")
     
     # -------------------- retreives all the information needed (and specified ) from csv file --------------------
     def get_data_from_csv(self, full_path: str):
