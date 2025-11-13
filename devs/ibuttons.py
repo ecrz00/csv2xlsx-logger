@@ -277,7 +277,7 @@ class MacroHandler():
     
     #-------------------- builds the formula depending if the average computed is per sheet(subject) or per hour (using the average per subject already computed)
     def build_average_formula_per_subject(self,numbers, title_per_column, row, offset=3):
-        columns = [f"{title_per_column}!{self.convert_number_to_excel_column(n, offset)}{row}" for n in numbers]
+        columns = [f"'{title_per_column}'!{self.convert_number_to_excel_column(n, offset)}{row}" for n in numbers]
         return f"=AVERAGE({','.join(columns)})"
     #end def
     
